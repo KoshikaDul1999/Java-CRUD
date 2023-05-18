@@ -87,7 +87,32 @@ public class Employee {
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String empid = txtid.getText();
 
+                try {
+                    pst = con.prepareStatement("select  empname,salary,mobile from employee where id = ?");
+                    pst.setString(1,empid);
+                    ResultSet rs = pst.executeQuery();
+
+                    if (rs.next()==true){
+                        String empname = rs.getString(1);
+                        String emsalary = rs.getString(2);
+                        String emmobile = rs.getString(3);
+
+                        txtName.setText(empname);
+                        txtSalary.setText(emsalary);
+                        txtMobile.setText(emmobile);
+
+                    }else{
+                        txtName.setText("");
+                        txtSalary.setText("");
+                        txtMobile.setText("");
+                        JOptionPane.showMessageDialog(null, "Invalid Employee ID!!!");
+                    }
+
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         updateButton.addActionListener(new ActionListener() {
