@@ -149,10 +149,24 @@ public class Employee {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String empid;
 
+                empid = txtid.getText();
 
+                try {
+                    pst = con.prepareStatement("delete from employee where id = ?");
+                    pst.setString(1,empid);
+                    pst.executeUpdate();
+                    JOptionPane.showMessageDialog(null,"Record Deleted...");
 
-
+                    table_load();
+                    txtName.setText("");
+                    txtSalary.setText("");
+                    txtMobile.setText("");
+                    txtName.requestFocus();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }
