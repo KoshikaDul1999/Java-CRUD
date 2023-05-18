@@ -118,9 +118,32 @@ public class Employee {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String empid,empname,salary,mobile;
 
+                empname = txtName.getText();
+                salary = txtSalary.getText();
+                mobile = txtMobile.getText();
+                empid = txtid.getText();
 
+                try {
+                    pst = con.prepareStatement("update employee set empname = ?, salary = ?, mobile = ? where id = ?");
+                    pst.setString(1,empname);
+                    pst.setString(2,salary);
+                    pst.setString(3,mobile);
+                    pst.setString(4,empid);
 
+                    pst.executeUpdate();
+
+                    JOptionPane.showMessageDialog(null, "Record Updated");
+                    table_load();
+
+                    txtName.setText("");
+                    txtSalary.setText("");
+                    txtMobile.setText("");
+                    txtName.requestFocus();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         deleteButton.addActionListener(new ActionListener() {
