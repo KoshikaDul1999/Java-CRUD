@@ -1,10 +1,9 @@
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Employee {
     private JPanel main;
@@ -44,6 +43,8 @@ public class Employee {
     public void table_load(){
         try {
             pst = con.prepareStatement("select * from employee");
+            ResultSet rs = pst.executeQuery();
+            table1.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException e) {
             e.printStackTrace();
         }
