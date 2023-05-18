@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 
 public class Employee {
     private JPanel Main;
@@ -11,4 +14,38 @@ public class Employee {
     private JButton deleteButton;
     private JButton searchButton;
     private JTextField txtid;
+
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Employee");
+        frame.setContentPane(new Employee().Main);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    Connection con;
+    PreparedStatement pst;
+
+    public void connect(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/racompany", "root","");
+            System.out.println("Connection Succeed...");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Employee() {
+    saveButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    });
+}
 }
