@@ -41,12 +41,22 @@ public class Employee {
         }
     }
 
-    public Employee() {
-    saveButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
+    public void table_load(){
+        try {
+            pst = con.prepareStatement("select * from employee");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+
+    public Employee() {
+        connect();
+        table_load();
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
     });
 }
 }
